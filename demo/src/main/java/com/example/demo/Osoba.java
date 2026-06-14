@@ -2,6 +2,15 @@ package com.example.demo;
 
 import jakarta.persistence.*;
 //import org.springframework.data.annotation.Id;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Entity
 @Table(name="KsiazkaTelefoniczna")
@@ -30,6 +39,10 @@ public class Osoba {
     }
 
     public Osoba() {
+
+    }
+
+    public Osoba(String imie, String nazwisko, String telefon, String email, String opis, boolean nowy) {
 
     }
 
@@ -104,15 +117,34 @@ public class Osoba {
     }
 
 
+    @Repository
+    public interface OsobaRepo extends JpaRepository <Osoba, Integer> {
+    }
 
+    @Controller
+    public class addControler {
+        @Autowired
+        private OsobaRepo osobaRepo;
 
+        @RequestMapping("/formularz")
+        public String pokazFormularz() {
+            return "formularz";
+        }
 
-
-
-
-
-
-
-
+        @RequestMapping("/dodaj")
+        public String dodajemyDane(
+                @RequestParam("imie") String imie,
+                @RequestParam("nazwisko") String nazwisko,
+                @RequestParam("telefon") String telefon,
+                @RequestParam("email") String email,
+                @RequestParam("opis") String opis,
+                Model model)
+                throws Exception {
+            Osoba osoba = new Osoba(imie, nazwisko, telefon, email, opis, true);
+            System.out.println(osoba);
+            osobaRepo.save(osoba); // ZAPIS DO BAZY !!!!
+            model.addAttribute("osoba", osoba);
+            return "Widok";
+        }
+    }
 }
-
