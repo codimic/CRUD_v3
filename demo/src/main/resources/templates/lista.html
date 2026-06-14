@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista osób</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          crossorigin="anonymous">
+</head>
+<body class="container mt-4">
+
+<h1>Lista osób</h1>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Telefon</th>
+        <th>Email</th>
+        <th>Opis</th>
+        <th>Akcja</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="osoba : ${osoby}">
+        <td th:text="${osoba.id}">1</td>
+        <td th:text="${osoba.imie}">Jan</td>
+        <td th:text="${osoba.nazwisko}">Kowalski</td>
+        <td th:text="${osoba.telefon}">123456789</td>
+        <td th:text="${osoba.email}">email@example.com</td>
+        <td th:text="${osoba.opis}">Opis</td>
+        <td>
+            <form th:action="@{/usun/{id}(id=${osoba.id})}" method="post">
+                <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Czy na pewno chcesz usunąć tę osobę?')">
+                    Usuń
+                </button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/formularz" class="btn btn-primary">Dodaj osobę</a>
+
+</body>
+</html>
