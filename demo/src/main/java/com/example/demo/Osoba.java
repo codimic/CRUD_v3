@@ -1,58 +1,38 @@
 package com.example.demo;
 
 import jakarta.persistence.*;
-//import org.springframework.data.annotation.Id;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @Entity
-@Table(name="KsiazkaTelefoniczna")
+@Table(name = "KsiazkaTelefoniczna")
 public class Osoba {
 
-//    @jakarta.persistence.Id
-//    private Long id1;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String imie;
     private String nazwisko;
-    @Column(name ="numer", nullable=false)
-    private String telefon;
-    private String email;
-    @Transient
-    boolean  nowy;
 
-    public Osoba(Integer id, String imie, String nazwisko, String telefon, String email, boolean nowy) {
-        this.id = id;
+    @Column(name = "numer", nullable = false)
+    private String telefon;
+
+    private String email;
+    private String opis;
+
+    @Transient
+    private boolean nowy;
+
+    public Osoba() {
+    }
+
+    public Osoba(String imie, String nazwisko, String telefon, String email, String opis, boolean nowy) {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.telefon = telefon;
         this.email = email;
+        this.opis = opis;
         this.nowy = nowy;
     }
-
-    public Osoba() {
-
-    }
-
-    public Osoba(String imie, String nazwisko, String telefon, String email, String opis, boolean nowy) {
-
-    }
-
-//    public Long getId1() {
-//        return id1;
-//    }
-//
-//    public void setId1(Long id1) {
-//        this.id1 = id1;
-//    }
 
     public Integer getId() {
         return id;
@@ -94,6 +74,14 @@ public class Osoba {
         this.email = email;
     }
 
+    public String getOpis() {
+        return opis;
+    }
+
+    public void setOpis(String opis) {
+        this.opis = opis;
+    }
+
     public boolean isNowy() {
         return nowy;
     }
@@ -101,8 +89,6 @@ public class Osoba {
     public void setNowy(boolean nowy) {
         this.nowy = nowy;
     }
-
-
 
     @Override
     public String toString() {
@@ -112,39 +98,8 @@ public class Osoba {
                 ", nazwisko='" + nazwisko + '\'' +
                 ", telefon='" + telefon + '\'' +
                 ", email='" + email + '\'' +
+                ", opis='" + opis + '\'' +
                 ", nowy=" + nowy +
                 '}';
-    }
-
-
-    @Repository
-    public interface OsobaRepo extends JpaRepository <Osoba, Integer> {
-    }
-
-    @Controller
-    public class addControler {
-        @Autowired
-        private OsobaRepo osobaRepo;
-
-        @RequestMapping("/formularz")
-        public String pokazFormularz() {
-            return "formularz";
-        }
-
-        @RequestMapping("/dodaj")
-        public String dodajemyDane(
-                @RequestParam("imie") String imie,
-                @RequestParam("nazwisko") String nazwisko,
-                @RequestParam("telefon") String telefon,
-                @RequestParam("email") String email,
-                @RequestParam("opis") String opis,
-                Model model)
-                throws Exception {
-            Osoba osoba = new Osoba(imie, nazwisko, telefon, email, opis, true);
-            System.out.println(osoba);
-            osobaRepo.save(osoba); // ZAPIS DO BAZY !!!!
-            model.addAttribute("osoba", osoba);
-            return "Widok";
-        }
     }
 }

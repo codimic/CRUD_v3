@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Dodano dane</title>
+</head>
+<body>
+<h1>Dodałeś następujące dane:</h1>
+
+<p>Id: <span th:text="${osoba.id}">...</span></p>
+<p>Imię: <span th:text="${osoba.imie}">...</span></p>
+<p>Nazwisko: <span th:text="${osoba.nazwisko}">...</span></p>
+<p>Telefon: <span th:text="${osoba.telefon}">...</span></p>
+<p>Email: <span th:text="${osoba.email}">...</span></p>
+<p>Opis: <span th:text="${osoba.opis}">...</span></p>
+
+<a href="/formularz">Dodaj kolejną osobę</a>
+</body>
+</html>

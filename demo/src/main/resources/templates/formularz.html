@@ -3,34 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <title>Dodawanie do książki telefonicznej</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1FQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
 </head>
 <body>
-<form action="http://localhost:8080/dodaj">
+<form action="/dodaj" method="post">
   <table>
     <tr>
-      <td>Podaj imię </td>
+      <td>Podaj imię</td>
       <td><input name="imie"></td>
     </tr>
     <tr>
       <td>Podaj nazwisko</td>
-      <td> <input name="nazwisko"> </td>
+      <td><input name="nazwisko"></td>
     </tr>
     <tr>
-      <td>    Podaj telefon</td>
+      <td>Podaj telefon</td>
       <td><input name="telefon"></td>
     </tr>
     <tr>
-      <td>     Podaj email    </td>
+      <td>Podaj email</td>
       <td><input name="email"></td>
     </tr>
     <tr>
-      <td>     Podaj opis </td>
+      <td>Podaj opis</td>
       <td><input name="opis"></td>
     </tr>
     <tr>
       <td colspan="2">
-        <input type="submit"></td>
+        <input type="submit" value="Zapisz">
+      </td>
+    </tr>
   </table>
 </form>
 </body>
